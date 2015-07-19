@@ -11,8 +11,8 @@ import Control.Monad.State
 import Spacewalk.ApiTypes
 import Spacewalk.ApiInternal
 
-login :: SpacewalkRPC ()
-login = do
+loginRaw :: SpacewalkRPC Key
+loginRaw = do
     mk <- gets key
     case mk of
         Just _ -> error "Already logged in"
@@ -20,10 +20,12 @@ login = do
             user <- asks username
             pass <- asks password
             swRemoteBase "auth.login" (\ x -> x user pass)
-            -- k <- swRemoteBase "auth.login" (\ x -> x user pass)
-            -- put (SwS $ Just k)
+
+login :: SpacewalkRPC ()
+login = loginRaw >>= put . SwS . Just
+
+logoutRaw :: SpacewalkRPC Int
+logoutRaw = swRemote "auth.logout" id :: SpacewalkRPC Int
 
 logout :: SpacewalkRPC ()
-logout = do
-    _ <- swRemote "auth.logout" id :: SpacewalkRPC Int
-    put (SwS Nothing)
+logout = logoutRaw >> put (SwS Nothing)
