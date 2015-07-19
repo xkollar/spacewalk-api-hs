@@ -48,9 +48,12 @@ cabal-version:       >=1.8
 library
   hs-source-dirs:      src
   -- Modules exported by the library.
-  exposed-modules:     Spacewalk.Api,
-                       Spacewalk.ApiInternal,
-                       Spacewalk.ApiTypes
+  exposed-modules:     Spacewalk.ApiInternal,
+                       Spacewalk.ApiTypes,
+                       Spacewalk.Api,
+                       Spacewalk.Api.Auth,
+                       Spacewalk.Api.Preferences.Locale,
+                       Spacewalk.Api.User
   
   -- Modules included in this library but not exported.
   -- other-modules:       
