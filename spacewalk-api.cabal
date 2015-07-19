@@ -63,6 +63,6 @@ library
 executable spacewalk-api-example
   hs-source-dirs:      example, src
   main-is:             Main.hs
-  build-depends:       base ==4.6.*, haxr, mtl
+  build-depends:       base ==4.6.*, haxr, mtl, exceptions, transformers
   ghc-options:         -Wall -fwarn-tabs
 

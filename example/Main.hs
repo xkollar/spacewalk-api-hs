@@ -1,15 +1,25 @@
 module Main ( main ) where
 
+import Control.Monad.IO.Class
+import Control.Monad.Catch
+
 import Spacewalk.Api
-import Spacewalk.ApiInternal
-import Spacewalk.ApiTypes
 import System.Environment (getArgs)
+
+import qualified Spacewalk.Api.User as User
 
 main :: IO ()
 main = do
     [server, user, pass] <- getArgs
-    x <- runSwAPI server user pass $ do
+    runSwAPI server user pass $ do
+        catchAll (User.create  "test" "tset5" "A" "B" "a@b.c") $ \ _ -> do
+            liftIO . putStrLn $ "Ayayay: caught exception"
+            User.delete "test"
+            User.create "test" "tset5" "A" "B" "a@b.c"
+        User.getDetails "test" >>= liftIO . print
+        User.getLoggedInTime "test" >>= liftIO . print
+        User.disable "test"
+        User.enable "test"
+        User.delete "test"
         return ()
-        swRemote "user.create" (\ x -> x "test" "tset5" "A" "B" "a@b.c") :: SpacewalkRPC Int
-    print x
-    return ()
+    putStrLn "Done."

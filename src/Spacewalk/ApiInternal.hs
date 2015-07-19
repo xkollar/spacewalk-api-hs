@@ -9,6 +9,9 @@ import Network.XmlRpc.Client
 
 import Spacewalk.ApiTypes
 
+voidInt :: Functor f => f Int -> f ()
+voidInt = void
+
 swRemoteBase :: Remote a => String -> (a -> IO b) -> SpacewalkRPC b
 swRemoteBase s m = do
     u <- asks apiurl
