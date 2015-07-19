@@ -12,14 +12,13 @@ main :: IO ()
 main = do
     [server, user, pass] <- getArgs
     runSwAPI server user pass $ do
-        catchAll (User.create  "test" "tset5" "A" "B" "a@b.c") $ \ _ -> do
-            liftIO . putStrLn $ "Ayayay: caught exception"
-            User.delete "test"
-            User.create "test" "tset5" "A" "B" "a@b.c"
-        User.getDetails "test" >>= liftIO . print
-        User.getLoggedInTime "test" >>= liftIO . print
-        User.disable "test"
-        User.enable "test"
-        User.delete "test"
+        bracket_
+            (User.create  "test" "tset5" "A" "B" "a@b.c")
+            (User.delete "test")
+            $ do
+                User.getDetails "admin" >>= liftIO . print
+                User.getLoggedInTime "admin" >>= liftIO . print
+                User.disable "test"
+                User.enable "test"
         return ()
     putStrLn "Done."
