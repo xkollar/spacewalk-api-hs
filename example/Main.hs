@@ -27,7 +27,6 @@ createUserExample u =
         $ do
             -- User.getDetails u >>= liftIO . print
             -- User.getLoggedInTime u >>= liftIO . print
-            listNeverLoggedIn
             User.disable u
             User.enable u
 
@@ -36,5 +35,6 @@ main = do
     [server, user, pass] <- getArgs
     runSwAPI server user pass $ do
         createUserExample "test"
+        listNeverLoggedIn
         return ()
     putStrLn "Done."
