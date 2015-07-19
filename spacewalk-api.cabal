@@ -60,9 +60,9 @@ library
   ghc-options:         -Wall -fwarn-tabs
   
 
-executable spacewalk-api-test
-  hs-source-dirs:      src
+executable spacewalk-api-example
+  hs-source-dirs:      example, src
   main-is:             Main.hs
   build-depends:       base ==4.6.*, haxr, mtl
-  ghc-options:         -Wall -fwarn-tabs -O2
+  ghc-options:         -Wall -fwarn-tabs
 
