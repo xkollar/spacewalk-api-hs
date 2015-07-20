@@ -1,6 +1,9 @@
 {-# LANGUAGE FlexibleContexts #-}
 module Spacewalk.Api.User
-    ( create
+    ( addAssignedSystemGroups
+    , addDefaultSystemGroups
+    , addRole
+    , create
     , delete
     , disable
     , enable
@@ -18,6 +21,20 @@ import Network.XmlRpc.Client (Remote)
 
 simpleUserMethod :: Remote (a -> IO b) => String -> a -> SpacewalkRPC b
 simpleUserMethod m login = swRemote ("user." ++ m) (\ x -> x login)
+
+------------------------------------
+
+addAssignedSystemGroups :: String -> [String] -> Bool -> SpacewalkRPC ()
+addAssignedSystemGroups login groups setdefault = voidInt $
+    swRemote "user.addAssignedSystemGroups" (\ x -> x login groups setdefault)
+
+addDefaultSystemGroups :: String -> [String] -> SpacewalkRPC ()
+addDefaultSystemGroups login groups = voidInt $
+    swRemote "user.addDefaultSystemGroups" (\ x -> x login groups)
+
+addRole :: String -> String -> SpacewalkRPC ()
+addRole login role = voidInt $
+    swRemote "user.addRole" (\ x -> x login role)
 
 create :: String -> String -> String -> String -> String -> SpacewalkRPC ()
 create login pw namef namel email = voidInt $
