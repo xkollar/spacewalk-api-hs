@@ -1,9 +1,23 @@
-module Spacewalk.Api.User where
+{-# LANGUAGE FlexibleContexts #-}
+module Spacewalk.Api.User
+    ( create
+    , delete
+    , disable
+    , enable
+    , getDetails
+    , getLoggedInTime
+    , listAssignableRoles
+    , listUsers
+    ) where
 
 import Spacewalk.ApiTypes
 import Spacewalk.ApiInternal
 
 import Network.XmlRpc.Internals
+import Network.XmlRpc.Client (Remote)
+
+simpleUserMethod :: Remote (a -> IO b) => String -> a -> SpacewalkRPC b
+simpleUserMethod m login = swRemote ("user." ++ m) (\ x -> x login)
 
 create :: String -> String -> String -> String -> String -> SpacewalkRPC ()
 create login pw namef namel email = voidInt $
@@ -26,6 +40,9 @@ getDetails login = swRemote "user.getDetails" (\ x -> x login)
 
 getLoggedInTime :: String -> SpacewalkRPC Value
 getLoggedInTime login = swRemote "user.getLoggedInTime" (\ x -> x login)
+
+listAssignableRoles :: SpacewalkRPC [String]
+listAssignableRoles = swRemote "user.listAssignableRoles" id
 
 -- | List logins and information whether the account is enabled or not
 -- Rest of the return value of the API is useless :-/.
