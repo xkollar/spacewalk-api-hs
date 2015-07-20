@@ -1,9 +1,12 @@
 {-# LANGUAGE FlexibleContexts #-}
 
-module Spacewalk.Api.Auth where
-
--- | This module is not supposed to be used directly.
+-- |
+-- Stability   :  experimental
+--
+-- This module is not supposed to be used directly.
 -- Use @Spacewalk.Api.runSwAPI@ to get and use token.
+
+module Spacewalk.Api.Auth where
 
 import Control.Monad.Reader
 import Control.Monad.State

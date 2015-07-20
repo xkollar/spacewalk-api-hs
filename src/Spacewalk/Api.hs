@@ -1,4 +1,7 @@
 {-# LANGUAGE FlexibleContexts #-}
+-- |
+-- Stability   :  experimental
+-- Portability :  non-portable (requires extensions and non-portable libraries)
 
 module Spacewalk.Api where
 

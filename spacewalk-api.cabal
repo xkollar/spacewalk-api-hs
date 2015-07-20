@@ -13,19 +13,24 @@ name:                spacewalk-api
 version:             0.1.0.0
 
 -- A short (one-line) description of the package.
-synopsis:            yyy
+synopsis:            Haskell bindings for Spacewalk XML-RPC API
 
 -- A longer description of the package.
 -- description:         
 
--- URL for the project homepage or repository.
-homepage:            xxx
+category:            Network
 
 -- The license under which the package is released.
 license:             GPL-3
 
 -- The file containing the license text.
 license-file:        LICENSE
+
+-- URL for the project homepage or repository.
+homepage:            https://github.com/xkollar/spacewalk-api-hs
+
+-- A copyright notice.
+-- copyright:           
 
 -- The package author(s).
 author:              Matej Kollar
@@ -34,16 +39,16 @@ author:              Matej Kollar
 -- patches.
 maintainer:          208115@mail.muni.cz
 
--- A copyright notice.
--- copyright:           
-
-category:            Web
-
-build-type:          Simple
-
 -- Constraint on the version of Cabal needed to build this package.
 cabal-version:       >=1.8
 
+build-type:          Simple
+
+Bug-reports: https://github.com/xkollar/spacewalk-api-hs/issues
+
+Source-repository head
+  type:     git
+  location: git://github.com/xkollar/spacewalk-api-hs.git
 
 library
   hs-source-dirs:      src

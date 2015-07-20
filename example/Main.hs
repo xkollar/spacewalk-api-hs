@@ -19,22 +19,23 @@ listNeverLoggedIn = do
             b <- catchAll (User.getLoggedInTime login >> return False) (return . const True)
             when b $ (liftIO . putStrLn) login
 
-createUserExample :: String -> SpacewalkRPC ()
-createUserExample u =
+createUserExample :: SpacewalkRPC ()
+createUserExample =
     bracket_
-        (User.create  u "tset5" "A" "B" "a@b.c")
+        (User.create u "password" "A" "B" "a@b.c")
         (User.delete u)
         $ do
             -- User.getDetails u >>= liftIO . print
             -- User.getLoggedInTime u >>= liftIO . print
             User.disable u
             User.enable u
+    where u = "test"
 
 main :: IO ()
 main = do
     [server, user, pass] <- getArgs
     runSwAPI server user pass $ do
-        createUserExample "test"
+        createUserExample
         listNeverLoggedIn
         return ()
     putStrLn "Done."
