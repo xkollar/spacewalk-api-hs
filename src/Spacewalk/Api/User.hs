@@ -10,14 +10,18 @@ module Spacewalk.Api.User
     , getDetails
     , getLoggedInTime
     , listAssignableRoles
+    , listRoles
     , listUsers
+    , removeAssignedSystemGroups
     ) where
+
+import Data.Time.LocalTime (LocalTime)
+import Network.XmlRpc.Internals
+import Network.XmlRpc.Client (Remote)
 
 import Spacewalk.ApiTypes
 import Spacewalk.ApiInternal
 
-import Network.XmlRpc.Internals
-import Network.XmlRpc.Client (Remote)
 
 simpleUserMethod :: Remote (a -> IO b) => String -> a -> SpacewalkRPC b
 simpleUserMethod m login = swRemote ("user." ++ m) (\ x -> x login)
@@ -52,11 +56,14 @@ enable = voidInt . simpleUserMethod "enable"
 getDetails :: String -> SpacewalkRPC Value
 getDetails = simpleUserMethod "getDetails"
 
-getLoggedInTime :: String -> SpacewalkRPC Value
+getLoggedInTime :: String -> SpacewalkRPC LocalTime
 getLoggedInTime = simpleUserMethod "getLoggedInTime"
 
 listAssignableRoles :: SpacewalkRPC [String]
 listAssignableRoles = swRemote "user.listAssignableRoles" id
+
+listRoles :: String -> SpacewalkRPC [String]
+listRoles = simpleUserMethod "listRoles"
 
 -- | List logins and information whether the account is enabled or not
 -- Rest of the return value of the API is useless :-/.
@@ -67,3 +74,7 @@ listUsers = swRemote "user.listUsers" id >>= handleError fail . decode where
             l <- getField "login" v'
             e <- getField "enabled" v'
             return (l,e)
+
+removeAssignedSystemGroups :: String -> [String] -> Bool -> SpacewalkRPC ()
+removeAssignedSystemGroups login groups removefromdefaults = voidInt $
+    swRemote "user.removeAssignedSystemGroups" (\ x -> x login groups removefromdefaults)
