@@ -13,7 +13,22 @@ import Spacewalk.ApiTypes
 -- import Spacewalk.ApiInternal
 import qualified Spacewalk.Api.Auth as Auth
 
-runSwAPI :: String -> String -> String -> SpacewalkRPC a -> IO a
+-- | Run 'SpacewalkRPC' code.
+--
+-- > main :: IO ()
+-- > main = do
+-- >     [server, user, pass] <- getArgs
+-- >     runSwAPI server user pass $ do
+-- >         User.listUsers >>= mapM_ (liftIO . print)
+runSwAPI
+    :: String
+    -- ^ XML-RPC entrypoint URL (usually @http:\/\/\<FQDN\>\/rpc\/api@).
+    -> String
+    -- ^ Login.
+    -> String
+    -- ^ Password.
+    -> SpacewalkRPC a
+    -> IO a
 runSwAPI s u p a = fmap fst $ runStateT (runReaderT a' re) st where
     a' = do
         Auth.login
