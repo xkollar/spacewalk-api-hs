@@ -13,6 +13,10 @@ module Spacewalk.Api.User
     , listRoles
     , listUsers
     , removeAssignedSystemGroups
+    , removeRole
+    , setCreateDefaultSystemGroup
+    , setReadOnly
+    , usePamAuthentication
     ) where
 
 import Data.Time.LocalTime (LocalTime)
@@ -78,3 +82,22 @@ listUsers = swRemote "user.listUsers" id >>= handleError fail . decode where
 removeAssignedSystemGroups :: String -> [String] -> Bool -> SpacewalkRPC ()
 removeAssignedSystemGroups login groups removefromdefaults = voidInt $
     swRemote "user.removeAssignedSystemGroups" (\ x -> x login groups removefromdefaults)
+
+removeRole :: String -> String -> SpacewalkRPC ()
+removeRole login role = voidInt $
+    swRemote "user.removeRole" (\ x -> x login role)
+
+setCreateDefaultSystemGroup :: Bool -> SpacewalkRPC ()
+setCreateDefaultSystemGroup createdefault = voidInt $
+    swRemote "user.setCreateDefaultSystemGroup" (\ x -> x createdefault)
+
+setReadOnly :: String -> Bool -> SpacewalkRPC ()
+setReadOnly login readonly = voidInt $
+    swRemote "user.setReadOnly" (\ x -> x login readonly)
+
+usePamAuthentication :: String -> Bool -> SpacewalkRPC ()
+usePamAuthentication login usepam = voidInt $
+    swRemote "user.usePamAuthentication" (\ x -> x login $ boolToInt usepam)
+    where
+        boolToInt :: Bool -> Int
+        boolToInt b = if b then 1 else 0
