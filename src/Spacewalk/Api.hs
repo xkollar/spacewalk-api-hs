@@ -1,16 +1,10 @@
 {-# LANGUAGE FlexibleContexts #-}
--- |
--- Stability   :  experimental
--- Portability :  non-portable (requires extensions and non-portable libraries)
-
 module Spacewalk.Api where
 
--- import Control.Monad
 import Control.Monad.Reader
 import Control.Monad.State
 
 import Spacewalk.ApiTypes
--- import Spacewalk.ApiInternal
 import qualified Spacewalk.Api.Auth as Auth
 
 -- | Run 'SpacewalkRPC' code.

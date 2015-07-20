@@ -19,6 +19,8 @@ synopsis:            Haskell bindings for Spacewalk XML-RPC API
 -- description:         
 
 category:            Network
+stability:           experimental
+portability:         non-portable (requires extensions and non-portable libraries)
 
 -- The license under which the package is released.
 license:             GPL-3
@@ -44,9 +46,9 @@ cabal-version:       >=1.8
 
 build-type:          Simple
 
-Bug-reports: https://github.com/xkollar/spacewalk-api-hs/issues
+bug-reports: https://github.com/xkollar/spacewalk-api-hs/issues
 
-Source-repository head
+source-repository head
   type:     git
   location: git://github.com/xkollar/spacewalk-api-hs.git
 
