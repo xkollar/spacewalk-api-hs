@@ -24,22 +24,19 @@ create login pw namef namel email = voidInt $
     swRemote "user.create" (\ x -> x login pw namef namel email)
 
 delete :: String -> SpacewalkRPC ()
-delete login = voidInt $
-    swRemote "user.delete" (\ x -> x login)
+delete = voidInt . simpleUserMethod "delete"
 
 disable :: String -> SpacewalkRPC ()
-disable login = voidInt $
-    swRemote "user.disable" (\ x -> x login)
+disable = voidInt . simpleUserMethod "disable"
 
 enable :: String -> SpacewalkRPC ()
-enable login = voidInt $
-    swRemote "user.enable" (\ x -> x login)
+enable = voidInt . simpleUserMethod "enable"
 
 getDetails :: String -> SpacewalkRPC Value
-getDetails login = swRemote "user.getDetails" (\ x -> x login)
+getDetails = simpleUserMethod "getDetails"
 
 getLoggedInTime :: String -> SpacewalkRPC Value
-getLoggedInTime login = swRemote "user.getLoggedInTime" (\ x -> x login)
+getLoggedInTime = simpleUserMethod "getLoggedInTime"
 
 listAssignableRoles :: SpacewalkRPC [String]
 listAssignableRoles = swRemote "user.listAssignableRoles" id
