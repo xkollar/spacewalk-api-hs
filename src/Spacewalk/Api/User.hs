@@ -28,7 +28,7 @@ import Spacewalk.ApiInternal
 
 
 simpleUserMethod :: Remote (a -> IO b) => String -> a -> SpacewalkRPC b
-simpleUserMethod m login = swRemote ("user." ++ m) (\ x -> x login)
+simpleUserMethod m login = swRemote m (\ x -> x login)
 
 ------------------------------------
 
@@ -49,25 +49,25 @@ create login pw namef namel email = voidInt $
     swRemote "user.create" (\ x -> x login pw namef namel email)
 
 delete :: String -> SpacewalkRPC ()
-delete = voidInt . simpleUserMethod "delete"
+delete = voidInt . simpleUserMethod "user.delete"
 
 disable :: String -> SpacewalkRPC ()
-disable = voidInt . simpleUserMethod "disable"
+disable = voidInt . simpleUserMethod "user.disable"
 
 enable :: String -> SpacewalkRPC ()
-enable = voidInt . simpleUserMethod "enable"
+enable = voidInt . simpleUserMethod "user.enable"
 
 getDetails :: String -> SpacewalkRPC Value
-getDetails = simpleUserMethod "getDetails"
+getDetails = simpleUserMethod "user.getDetails"
 
 getLoggedInTime :: String -> SpacewalkRPC LocalTime
-getLoggedInTime = simpleUserMethod "getLoggedInTime"
+getLoggedInTime = simpleUserMethod "user.getLoggedInTime"
 
 listAssignableRoles :: SpacewalkRPC [String]
 listAssignableRoles = swRemote "user.listAssignableRoles" id
 
 listRoles :: String -> SpacewalkRPC [String]
-listRoles = simpleUserMethod "listRoles"
+listRoles = simpleUserMethod "user.listRoles"
 
 -- | List logins and information whether the account is enabled or not
 -- Rest of the return value of the API is useless :-/.
