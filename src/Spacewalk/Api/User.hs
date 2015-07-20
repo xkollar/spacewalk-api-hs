@@ -5,7 +5,6 @@ import Spacewalk.ApiInternal
 
 import Network.XmlRpc.Internals
 
--- | Thrown away return value, as it is only 1 or exception anyway...
 create :: String -> String -> String -> String -> String -> SpacewalkRPC ()
 create login pw namef namel email = voidInt $
     swRemote "user.create" (\ x -> x login pw namef namel email)

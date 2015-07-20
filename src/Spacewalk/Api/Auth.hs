@@ -4,7 +4,7 @@
 -- Stability   :  experimental
 --
 -- This module is not supposed to be used directly.
--- Use @Spacewalk.Api.runSwAPI@ to get and use token.
+-- Use 'Spacewalk.Api.runSwAPI' to get and use token.
 
 module Spacewalk.Api.Auth where
 

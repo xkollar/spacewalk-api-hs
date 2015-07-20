@@ -1,4 +1,13 @@
 {-# LANGUAGE FlexibleContexts #-}
+-- |
+-- This module contains only function to run 'SpacewalkRPC' code.
+-- Bindings can be found in @Spacewalk.Api.*@ modules.
+-- As of now they are incomplete, however contributors are welcome.
+--
+-- If there is unimplemented method, you can use @Spacewalk.ApiInternal@.
+--
+-- Spacewalk API methods that return @1@ or throw exception
+-- in this api return @()@ or throw exception.
 module Spacewalk.Api where
 
 import Control.Monad.Reader
