@@ -1,4 +1,14 @@
 {-# LANGUAGE FlexibleContexts #-}
+-- |
+-- Following methods are intentionally unimplemented:
+--
+-- * @user.addAssignedSystemGroup@ (use 'addAssignedSystemGroups')
+--
+-- * @user.addDefaultSystemGroup@ (use 'addDefaultSystemGroups')
+--
+-- * @user.removeAssignedSystemGroup@ (use 'removeAssignedSystemGroups')
+--
+-- * @user.removeDefaultSystemGroup@ (use 'removeDefaultSystemGroups')
 module Spacewalk.Api.User
     ( addAssignedSystemGroups
     , addDefaultSystemGroups
@@ -13,6 +23,7 @@ module Spacewalk.Api.User
     , listRoles
     , listUsers
     , removeAssignedSystemGroups
+    , removeDefaultSystemGroups
     , removeRole
     , setCreateDefaultSystemGroup
     , setReadOnly
@@ -82,6 +93,10 @@ listUsers = swRemote "user.listUsers" id >>= handleError fail . decode where
 removeAssignedSystemGroups :: String -> [String] -> Bool -> SpacewalkRPC ()
 removeAssignedSystemGroups login groups removefromdefaults = voidInt $
     swRemote "user.removeAssignedSystemGroups" (\ x -> x login groups removefromdefaults)
+
+removeDefaultSystemGroups :: String -> [String] -> SpacewalkRPC ()
+removeDefaultSystemGroups login groups = voidInt $
+    swRemote "user.removeDefaultSystemGroups" (\ x -> x login groups)
 
 removeRole :: String -> String -> SpacewalkRPC ()
 removeRole login role = voidInt $
