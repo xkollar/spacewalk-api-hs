@@ -1,4 +1,9 @@
-module Spacewalk.Api.Preferences.Locale where
+module Spacewalk.Api.Preferences.Locale
+    ( listLocales
+    , listTimeZones
+    , setLocale
+    , setTimeZone
+    ) where
 
 import Spacewalk.ApiTypes
 import Spacewalk.ApiInternal

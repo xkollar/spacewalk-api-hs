@@ -8,7 +8,8 @@
 --
 -- Spacewalk API methods that return @1@ or throw exception
 -- in this api return @()@ or throw exception.
-module Spacewalk.Api where
+module Spacewalk.Api () where
+
 
 import Control.Monad.Reader
 import Control.Monad.State

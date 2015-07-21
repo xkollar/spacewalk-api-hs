@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleContexts #-}
-
 module Spacewalk.ApiInternal where
 
 -- import Control.Monad

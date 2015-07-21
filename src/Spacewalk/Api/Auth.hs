@@ -6,7 +6,12 @@
 -- This module is not supposed to be used directly.
 -- Use 'Spacewalk.Api.runSwAPI' to get and use token.
 
-module Spacewalk.Api.Auth where
+module Spacewalk.Api.Auth
+    ( login
+    , login'
+    , logout
+    , logout'
+    ) where
 
 import Control.Monad.Reader
 import Control.Monad.State
