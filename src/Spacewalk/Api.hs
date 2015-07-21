@@ -8,7 +8,7 @@
 --
 -- Spacewalk API methods that return @1@ or throw exception
 -- in this api return @()@ or throw exception.
-module Spacewalk.Api () where
+module Spacewalk.Api ( runSwAPI, runSwAPI' ) where
 
 
 import Control.Monad.Reader
@@ -17,7 +17,7 @@ import Control.Monad.State
 import Spacewalk.ApiTypes
 import qualified Spacewalk.Api.Auth as Auth
 
--- | Run 'SpacewalkRPC' code.
+-- | Run 'SpacewalkRPC' code. Performs authentification for you.
 --
 -- > main :: IO ()
 -- > main = do
@@ -33,11 +33,18 @@ runSwAPI
     -- ^ Password.
     -> SpacewalkRPC a
     -> IO a
-runSwAPI s u p a = fmap fst $ runStateT (runReaderT a' re) st where
-    a' = do
-        Auth.login
-        x <- a
-        Auth.logout
-        return x
+runSwAPI s u p a = runSwAPI' s u p (Auth.login >> a >>= \ x -> Auth.logout >> return x)
+
+-- | For the rare cases you need to handle authentification yourselves. Otherwise use 'runSwAPI'.
+runSwAPI'
+    :: String
+    -- ^ XML-RPC entrypoint URL (usually @http:\/\/\<FQDN\>\/rpc\/api@).
+    -> String
+    -- ^ Login.
+    -> String
+    -- ^ Password.
+    -> SpacewalkRPC a
+    -> IO a
+runSwAPI' s u p a = fmap fst $ runStateT (runReaderT a re) st where
     st = SwS { key = Nothing }
     re = SwR { apiurl = s, username = u, password = p }
