@@ -48,6 +48,9 @@ build-type:          Simple
 
 bug-reports: https://github.com/xkollar/spacewalk-api-hs/issues
 
+extra-source-files: README.md
+                    example/Main.hs
+
 source-repository head
   type:     git
   location: git://github.com/xkollar/spacewalk-api-hs.git
@@ -70,9 +73,9 @@ library
   ghc-options:         -Wall -fwarn-tabs
   
 
-executable spacewalk-api-example
-  hs-source-dirs:      example, src
-  main-is:             Main.hs
-  build-depends:       base ==4.6.*, exceptions, haxr, mtl, time, transformers
-  ghc-options:         -Wall -fwarn-tabs
+-- executable spacewalk-api-example
+--   hs-source-dirs:      example, src
+--   main-is:             Main.hs
+--   build-depends:       base ==4.6.*, exceptions, haxr, mtl, time, transformers
+--   ghc-options:         -Wall -fwarn-tabs
 
