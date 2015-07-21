@@ -24,19 +24,3 @@ swRemote s m = do
     case mk of
         Nothing -> error "Unauthenticated"
         Just k -> swRemoteBase s (\ x -> m (x k))
-
-api_auth_login :: SpacewalkRPC ()
-api_auth_login = do
-    mk <- gets key
-    case mk of
-        Just _ -> error "Already logged in"
-        Nothing -> do
-            user <- asks username
-            pass <- asks password
-            k <- swRemoteBase "auth.login" (\ x -> x user pass)
-            put (SwS $ Just k)
-
-api_auth_logout :: SpacewalkRPC ()
-api_auth_logout = do
-    _ <- swRemote "auth.logout" id :: SpacewalkRPC Int
-    put (SwS Nothing)
