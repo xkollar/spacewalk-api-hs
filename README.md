@@ -3,8 +3,13 @@ Haskell Spacewalk API
 
 Simple Haskell bindings for Spacewalk XML-RPC API.
 
-It is incomplete. Pull requests are welcome.
-Original api documentation available at <http://www.spacewalkproject.org/documentation/api/2.3/index.html>.
+It is incomplete and new methods will be added on
+demand (pull requests are welcome). This is intentional
+as I operate under assumption that many methods are
+not used anymore and idea is to add methods that
+are used by/useful to someone.
+
+Original API documentation available at <http://www.spacewalkproject.org/documentation/api/2.3/index.html>.
 
 It handles session key for you.
 
