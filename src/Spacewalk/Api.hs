@@ -45,6 +45,6 @@ runSwAPI'
     -- ^ Password.
     -> SpacewalkRPC a
     -> IO a
-runSwAPI' s u p a = fmap fst $ runStateT (runReaderT a re) st where
+runSwAPI' s u p a = fst `fmap` runStateT (runReaderT a re) st where
     st = SwS { key = Nothing }
     re = SwR { apiurl = s, username = u, password = p }

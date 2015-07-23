@@ -1,7 +1,6 @@
 {-# LANGUAGE FlexibleContexts #-}
 module Spacewalk.ApiInternal where
 
--- import Control.Monad
 import Control.Monad.Reader
 import Control.Monad.State
 import Network.XmlRpc.Client
