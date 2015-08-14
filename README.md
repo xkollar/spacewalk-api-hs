@@ -1,7 +1,7 @@
-Haskell Spacewalk API
-=====================
+Haskell Bindings for Spacewalk API
+==================================
 
-Simple Haskell bindings for Spacewalk XML-RPC API.
+Simple Haskell bindings for [Spacewalk](https://github.com/spacewalkproject/spacewalk) XML-RPC API.
 
 It is incomplete and new methods will be added on
 demand (pull requests are welcome). This is intentional
