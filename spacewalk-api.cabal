@@ -20,7 +20,7 @@ synopsis:            Haskell bindings for Spacewalk XML-RPC API
 
 category:            Network
 stability:           experimental
-portability:         non-portable (requires extensions and non-portable libraries)
+-- portability:         non-portable (requires extensions and non-portable libraries)
 
 -- The license under which the package is released.
 license:             GPL-3
@@ -61,47 +61,10 @@ library
   exposed-modules:     Spacewalk.ApiInternal,
                        Spacewalk.ApiTypes,
                        Spacewalk.Api,
-                       Spacewalk.Api.Actionchain,
-                       Spacewalk.Api.Activationkey,
                        Spacewalk.Api.Api,
                        Spacewalk.Api.Auth,
-                       Spacewalk.Api.Channel,
-                       Spacewalk.Api.Channel.Access,
-                       Spacewalk.Api.Channel.Org,
-                       Spacewalk.Api.Channel.Software,
-                       Spacewalk.Api.Configchannel,
-                       Spacewalk.Api.Distchannel,
-                       Spacewalk.Api.Errata,
-                       Spacewalk.Api.Kickstart,
-                       Spacewalk.Api.Kickstart.Filepreservation,
-                       Spacewalk.Api.Kickstart.Keys,
-                       Spacewalk.Api.Kickstart.Profile,
-                       Spacewalk.Api.Kickstart.Profile.Keys,
-                       Spacewalk.Api.Kickstart.Profile.Software,
-                       Spacewalk.Api.Kickstart.Profile.System,
-                       Spacewalk.Api.Kickstart.Snippet,
-                       Spacewalk.Api.Kickstart.Tree,
-                       Spacewalk.Api.Org,
-                       Spacewalk.Api.Org.Trusts,
-                       Spacewalk.Api.Packages,
-                       Spacewalk.Api.Packages.Provider,
-                       Spacewalk.Api.Packages.Search,
                        Spacewalk.Api.Preferences.Locale,
-                       Spacewalk.Api.Proxy,
-                       Spacewalk.Api.Satellite,
-                       Spacewalk.Api.Schedule,
-                       Spacewalk.Api.Sync.Master,
-                       Spacewalk.Api.Sync.Slave,
-                       Spacewalk.Api.System,
-                       Spacewalk.Api.System.Config,
-                       Spacewalk.Api.System.Crash,
-                       Spacewalk.Api.System.Custominfo,
-                       Spacewalk.Api.System.Provisioning.Snapshot,
-                       Spacewalk.Api.System.Scap,
-                       Spacewalk.Api.System.Search,
-                       Spacewalk.Api.Systemgroup,
-                       Spacewalk.Api.User,
-                       Spacewalk.Api.User.External
+                       Spacewalk.Api.User
   
   -- Modules included in this library but not exported.
   -- other-modules:       
