@@ -107,7 +107,7 @@ library
   -- other-modules:       
   
   -- Other library packages from which modules are imported.
-  build-depends:       base ==4.6.*, haxr, mtl, time
+  build-depends:       base >=4.5 && <=4.7, haxr, mtl, time
   ghc-options:         -Wall -fwarn-tabs
   
 
